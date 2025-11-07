@@ -1,0 +1,88 @@
+# === SECURITY - NEVER COMMIT THESE ===
+*.key
+*.pem
+*.env
+.env.local
+secrets.txt
+config.local.js
+*apikey*.txt
+*api-key*.txt
+
+# === PERSONAL FILES ===
+notes.txt
+instructions.txt
+TODO.txt
+personal-*.md
+
+# === DEVELOPMENT TEST FILES ===
+test-page.html
+*-test.html
+test-*.html
+test-*.js
+
+# === OLD/DEPRECATED CODE ===
+content-realtime.js
+*-old.js
+*-backup.js
+*.backup
+*.bak
+
+# === DEVELOPMENT TOOLS ===
+create-icons.js
+generate_icons.py
+icon-generator.html
+
+# === BUILD ARTIFACTS ===
+*.zip
+dist/
+build/
+
+# === IDE FILES ===
+.DS_Store
+*.log
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-*
+
+# === NODE (if you add it later) ===
+node_modules/
+npm-debug.log*
+package-lock.json
+yarn.lock
+
+# === TEMPORARY FILES ===
+.tmp/
+tmp/
+*.tmp
+*~
+
+# === OS FILES ===
+Thumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# === CHROME EXTENSION PACKAGING ===
+*.crx
+
+# === DOCUMENTATION (Keep only essential for GitHub) ===
+# Include: README.md, CONTRIBUTING.md, PRIVACY_POLICY.md, LICENSE
+# Include: ARCHITECTURE.md, TESTING_GUIDE.md (useful for contributors)
+# Exclude: Internal project docs
+FILE_INDEX.md
+PHASE_*.md
+WHATS_*.md
+*_IMPROVEMENT_*.md
+*_UPGRADE.md
+QUICKSTART.md
+ICONS_README.md
+PROJECT_SUMMARY.md
+SUBMISSION_CHECKLIST.md
+STORE_SUBMISSION_JUSTIFICATIONS.md
+GITHUB_SETUP.md
+OPEN_SOURCE_READY.md

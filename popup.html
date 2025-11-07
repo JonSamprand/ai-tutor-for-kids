@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tutor Settings</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 400px;
+      min-height: 500px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      padding: 0;
+    }
+
+    .container {
+      background: white;
+      margin: 0;
+      padding: 24px;
+      border-radius: 0;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #667eea;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      color: #667eea;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.5;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      background: #f5f5f5;
+      border-radius: 8px;
+    }
+
+    .toggle-label {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 26px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #667eea;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #f44336;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #d32f2f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+    }
+
+    .status-message {
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      display: none;
+    }
+
+    .status-success {
+      background: #4caf50;
+      color: white;
+    }
+
+    .status-error {
+      background: #f44336;
+      color: white;
+    }
+
+    .api-select {
+      margin-bottom: 12px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      background: white;
+      cursor: pointer;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎓 AI Tutor Settings</h1>
+      <p>✨ Make learning fun for your child!</p>
+      <p style="font-size: 11px; margin-top: 8px;">Need help? <a href="https://platform.openai.com/api-keys" target="_blank" style="color: #667eea; text-decoration: underline;">Get your API key here</a></p>
+    </div>
+
+    <div class="section api-select">
+      <label for="apiProvider">AI Provider</label>
+      <select id="apiProvider">
+        <option value="openai">OpenAI ⚡ Recommended</option>
+        <option value="anthropic">Anthropic (Claude) - Text Only</option>
+      </select>
+      <div class="hint">💡 OpenAI is recommended for the best experience!</div>
+    </div>
+
+    <div class="section">
+      <label for="apiKey">API Key</label>
+      <input type="password" id="apiKey" placeholder="sk-...">
+      <div class="hint">Your API key is stored locally and never shared</div>
+    </div>
+
+    <div class="section">
+      <label for="tutorMode">Tutor Mode</label>
+      <select id="tutorMode">
+        <option value="turnbased">Turn-based (Vision) ⭐ Recommended</option>
+        <option value="realtime">Hands-free (Experimental)</option>
+      </select>
+      <div class="hint">
+        <strong>✨ Turn-based:</strong> Best for kids! Sees the screen, press spacebar to talk. Fast & accurate!<br>
+        <strong>🎤 Hands-free:</strong> Experimental - always listening mode.
+      </div>
+    </div>
+
+    <div class="section">
+      <label for="voiceSelect">AI Voice (gpt-4o-mini-tts)</label>
+      <select id="voiceSelect">
+        <option value="nova">Nova 🌟 (Bright, energetic female) ⭐</option>
+        <option value="shimmer">Shimmer ✨ (Warm, cheerful female)</option>
+        <option value="coral">Coral 🪸 (Friendly, conversational)</option>
+        <option value="ballad">Ballad 🎶 (Smooth, melodic)</option>
+        <option value="verse">Verse 📝 (Natural, clear)</option>
+        <option value="alloy">Alloy 🎵 (Neutral, balanced)</option>
+        <option value="echo">Echo 🎤 (Calm male)</option>
+        <option value="sage">Sage 📚 (Wise, storyteller)</option>
+        <option value="ash">Ash 🌫️ (Soft, gentle)</option>
+        <option value="fable">Fable 📖 (Expressive, dramatic)</option>
+        <option value="marin">Marin 🌊 (Soothing, peaceful)</option>
+        <option value="cedar">Cedar 🌲 (Deep male)</option>
+        <option value="onyx">Onyx 🎙️ (Authoritative male)</option>
+      </select>
+      <div class="hint">
+        🎧 Try different voices to find your child's favorite!<br>
+        <strong>Nova</strong> is energetic and fun - great for most kids!
+      </div>
+    </div>
+
+    <div class="section">
+      <label for="systemPrompt">System Prompt (Tutor Instructions)</label>
+      <textarea id="systemPrompt" placeholder="You are a patient, encouraging tutor...">You are a patient, encouraging tutor for children. You can see their ENTIRE lesson and understand the complete learning journey.
+
+Your approach:
+1. See the BIG PICTURE - understand how all concepts connect
+2. Guide STEP-BY-STEP - break complex topics into simple steps
+3. Check UNDERSTANDING - ask questions before moving forward
+4. Be ENCOURAGING - celebrate progress and learning
+5. Make it RELATABLE - use everyday examples and analogies
+6. Stay FOCUSED - only teach what's in the lesson
+
+Keep responses to 2-3 sentences. Use simple language. Ask guiding questions to make them think. Be enthusiastic and patient!</textarea>
+      <div class="hint">💬 Customize how the AI talks to your child - keep it encouraging and positive!</div>
+    </div>
+
+    <div class="section">
+      <div class="toggle-container">
+        <span class="toggle-label">🔊 Voice Enabled</span>
+        <label class="switch">
+          <input type="checkbox" id="voiceEnabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn-primary" id="saveBtn">✨ Save & Apply Settings</button>
+      <button class="btn-secondary" id="clearMemoryBtn">🔄 Start Fresh</button>
+    </div>
+
+    <div class="status-message" id="statusMessage"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,552 @@
+/* AI Tutor - Award-Winning Children's UI 🏆 */
+
+/* ============================================================================
+   Color Palette - Vibrant & Playful
+   ============================================================================ */
+:root {
+  /* Primary Colors */
+  --primary-blue: #4A90E2;
+  --primary-green: #7ED321;
+  --primary-yellow: #F5A623;
+  --primary-purple: #9013FE;
+  --primary-pink: #FF6B9D;
+  
+  /* Semantic Colors */
+  --success: #50E3C2;
+  --warning: #F8E71C;
+  --error: #FF6B9D;
+  --info: #4A90E2;
+  
+  /* Backgrounds */
+  --bg-white: #FFFFFF;
+  --bg-light: #F7FAFC;
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.25);
+  
+  /* Animation Timing */
+  --fast: 150ms;
+  --normal: 300ms;
+  --slow: 600ms;
+  
+  /* Easing */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-smooth: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* ============================================================================
+   Floating Tutor Button - Impossible to Miss! 🎓
+   ============================================================================ */
+.ai-tutor-floating-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 72px;
+  height: 72px;
+  background: var(--bg-gradient);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  cursor: pointer;
+  z-index: 999999;
+  box-shadow: var(--shadow-xl);
+  transition: all var(--normal) var(--ease-bounce);
+  border: 4px solid white;
+  
+  /* Pulsing glow animation */
+  animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.6), var(--shadow-xl); }
+  50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.9), var(--shadow-xl); }
+}
+
+.ai-tutor-floating-btn:hover {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 0 60px rgba(102, 126, 234, 1), var(--shadow-xl);
+}
+
+.ai-tutor-floating-btn:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================================
+   Tutor Panel - Friendly & Engaging 💬
+   ============================================================================ */
+.ai-tutor-panel {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 420px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 48px);
+  background: var(--bg-white);
+  border-radius: 24px;
+  box-shadow: var(--shadow-xl);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+  
+  /* Entrance animation */
+  animation: slideIn var(--slow) var(--ease-bounce);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.ai-tutor-panel::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 24px;
+  background: var(--bg-gradient);
+  z-index: -1;
+}
+
+.ai-tutor-panel.hidden {
+  display: none;
+}
+
+/* ============================================================================
+   Header - Magical & Inviting ✨
+   ============================================================================ */
+.ai-tutor-header {
+  background: var(--bg-gradient);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px 20px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sparkle effect */
+.ai-tutor-header::after {
+  content: '✨';
+  position: absolute;
+  font-size: 24px;
+  animation: sparkle 3s ease-in-out infinite;
+  opacity: 0.6;
+  right: 60px;
+  top: 15px;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+  50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
+}
+
+.ai-tutor-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-tutor-close-btn {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--fast) var(--ease-smooth);
+  backdrop-filter: blur(10px);
+}
+
+.ai-tutor-close-btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ============================================================================
+   Status - Encouraging & Clear 💭
+   ============================================================================ */
+.ai-tutor-status {
+  padding: 16px 20px;
+  background: var(--bg-light);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-purple);
+  border-bottom: 2px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 50px;
+  
+  /* Fade in animation */
+  animation: fadeIn var(--normal) var(--ease-smooth);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================================
+   Conversation Area - Speech Bubbles! 💬
+   ============================================================================ */
+.ai-tutor-conversation {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: linear-gradient(to bottom, #f8f9ff, #ffffff);
+}
+
+.ai-tutor-conversation::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ai-tutor-conversation::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ai-tutor-conversation::-webkit-scrollbar-thumb {
+  background: var(--primary-purple);
+  border-radius: 4px;
+}
+
+/* Message Bubbles - Slide in from sides! */
+.ai-tutor-message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 85%;
+  animation: slideInMessage var(--normal) var(--ease-bounce);
+}
+
+@keyframes slideInMessage {
+  from {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.ai-tutor-message-you {
+  align-self: flex-end;
+  animation: slideInMessageRight var(--normal) var(--ease-bounce);
+}
+
+@keyframes slideInMessageRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.ai-tutor-message-role {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+  margin-left: 12px;
+}
+
+.ai-tutor-message-system .ai-tutor-message-role {
+  color: var(--info);
+}
+
+.ai-tutor-message-you .ai-tutor-message-role {
+  color: var(--primary-pink);
+  text-align: right;
+  margin-right: 12px;
+}
+
+.ai-tutor-message-ai .ai-tutor-message-role {
+  color: var(--primary-purple);
+}
+
+.ai-tutor-message-error .ai-tutor-message-role {
+  color: var(--error);
+}
+
+.ai-tutor-message-content {
+  background: white;
+  padding: 14px 18px;
+  border-radius: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  box-shadow: var(--shadow-sm);
+  word-wrap: break-word;
+  position: relative;
+}
+
+/* System messages */
+.ai-tutor-message-system .ai-tutor-message-content {
+  background: var(--bg-light);
+  color: var(--info);
+  font-weight: 500;
+  border: 2px solid var(--info);
+}
+
+/* User messages - Bright and cheerful! */
+.ai-tutor-message-you .ai-tutor-message-content {
+  background: linear-gradient(135deg, var(--primary-pink), #FFB3D9);
+  color: white;
+  box-shadow: var(--shadow-md);
+  font-weight: 500;
+}
+
+/* AI messages - Friendly purple! */
+.ai-tutor-message-ai .ai-tutor-message-content {
+  background: linear-gradient(135deg, var(--primary-purple), #B565FF);
+  color: white;
+  box-shadow: var(--shadow-md);
+  font-weight: 500;
+}
+
+/* Error messages - Gentle, not scary */
+.ai-tutor-message-error .ai-tutor-message-content {
+  background: #FFF5F7;
+  color: var(--error);
+  border: 2px solid var(--error);
+}
+
+/* ============================================================================
+   Controls - BIG, Colorful, Fun! 🎮
+   ============================================================================ */
+.ai-tutor-controls {
+  padding: 20px;
+  display: flex;
+  gap: 12px;
+  background: var(--bg-light);
+  border-top: 2px solid #E2E8F0;
+}
+
+/* Talk Button - HUGE and Inviting! */
+.ai-tutor-talk-btn {
+  flex: 1;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--primary-blue), #5FA8FF);
+  color: white;
+  box-shadow: var(--shadow-md);
+  transition: all var(--fast) var(--ease-bounce);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-tutor-talk-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.3));
+  transform: translateX(-100%);
+  transition: transform var(--normal) var(--ease-smooth);
+}
+
+.ai-tutor-talk-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.ai-tutor-talk-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.ai-tutor-talk-btn:active {
+  transform: scale(0.98);
+}
+
+/* Active/Listening state - Pulsing red (slower, more calming) */
+.ai-tutor-talk-btn.active {
+  background: linear-gradient(135deg, #FF4757, #FF6B9D);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
+  50% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(255, 71, 87, 0); }
+}
+
+/* Stop Button - Smaller to give talk button more space */
+.ai-tutor-stop-btn {
+  padding: 20px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  border: 3px solid var(--error);
+  border-radius: 20px;
+  cursor: pointer;
+  background: white;
+  color: var(--error);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--fast) var(--ease-smooth);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  min-width: auto;
+}
+
+.ai-tutor-stop-btn:hover {
+  background: var(--error);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================================================
+   Info Section - Friendly Instructions 💡
+   ============================================================================ */
+.ai-tutor-info {
+  text-align: center;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #FFF9E6, #FFFAED);
+  border-top: 2px solid var(--primary-yellow);
+  border-radius: 0 0 20px 20px;
+}
+
+.ai-tutor-info small {
+  color: #7C6A0A;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ============================================================================
+   Responsive Design - Works on all devices! 📱
+   ============================================================================ */
+@media (max-width: 480px) {
+  .ai-tutor-panel {
+    width: calc(100vw - 32px);
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .ai-tutor-floating-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .ai-tutor-header h3 {
+    font-size: 20px;
+  }
+  
+  .ai-tutor-talk-btn {
+    font-size: 16px;
+    padding: 18px;
+  }
+}
+
+/* ============================================================================
+   Loading Animations - Fun waiting! ⏳
+   ============================================================================ */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ============================================================================
+   Success Celebrations! 🎉
+   ============================================================================ */
+@keyframes celebrate {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.2) rotate(-5deg); }
+  50% { transform: scale(1.2) rotate(5deg); }
+  75% { transform: scale(1.2) rotate(-5deg); }
+  100% { transform: scale(1); }
+}
+
+.celebrate {
+  animation: celebrate var(--slow) var(--ease-bounce);
+}
+
+/* ============================================================================
+   Accessibility - Works for everyone! ♿
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .ai-tutor-panel {
+    border: 4px solid currentColor;
+  }
+  
+  .ai-tutor-talk-btn,
+  .ai-tutor-stop-btn {
+    border: 3px solid currentColor;
+  }
+}
+
+/* ============================================================================
+   Print - Don't print the tutor! 🖨️
+   ============================================================================ */
+@media print {
+  .ai-tutor-floating-btn,
+  .ai-tutor-panel {
+    display: none !important;
+  }
+}
