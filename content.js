@@ -1,4 +1,6 @@
 // AI Tutor Content Script - Unified (Turn-based + Realtime)
+// Version: 1.0.1
+// Last Updated: 2024-11-06
 
 let isTutorActive = false;
 let isRecording = false;
@@ -13,6 +15,13 @@ let currentMode = 'turnbased'; // 'turnbased' or 'realtime'
 let recognition = null;
 let currentAudio = null; // Track current playing audio
 let audioCleanupTimeout = null; // Timeout for cleanup
+
+// Feature flags
+const FEATURES = {
+  PROACTIVE_GREETING: true,
+  VISION_SUPPORT: true,
+  AUDIO_CLEANUP: true
+};
 
 // Initialize when page loads
 function init() {
