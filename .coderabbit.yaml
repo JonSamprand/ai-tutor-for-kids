@@ -1,0 +1,116 @@
+# CodeRabbit AI Code Review Configuration
+# For AI Tutor for Kids Chrome Extension
+
+language: "en-US"
+
+reviews:
+  # Enable high-level PR summaries
+  high_level_summary: true
+  
+  # Enable detailed file-by-file reviews
+  review_status: true
+  
+  # Fun poem summaries (why not!)
+  poem: true
+  
+  # Auto-review settings
+  auto_review:
+    enabled: true
+    drafts: false  # Don't waste reviews on drafts
+    
+  # Skip these file types
+  path_filters:
+    - "!*.md"  # Skip markdown documentation
+    - "!*.txt" # Skip text files
+    - "!*.png" # Skip images
+    - "!*.jpg"
+    - "!*.svg"
+    - "!LICENSE"
+    - "!.gitignore"
+    
+  # Focus areas specific to this project
+  focus:
+    - "Security vulnerabilities"
+    - "API key and credential handling"
+    - "Chrome extension best practices"
+    - "Privacy and data protection"
+    - "Error handling and validation"
+    - "Child safety considerations"
+    - "Code quality and maintainability"
+    - "Performance optimizations"
+    - "Accessibility improvements"
+
+# Tone and style for reviews
+tone_instructions: |
+  This is an educational open-source project that helps children learn.
+  
+  Please be:
+  - Encouraging and constructive
+  - Educational - explain WHY suggestions matter
+  - Security-focused - this handles API keys and children's data
+  - Clear and specific in recommendations
+  - Friendly to new contributors
+  
+  Special focus areas:
+  - API key security and storage
+  - Privacy protection for children
+  - Chrome extension security best practices
+  - Code that's easy for contributors to understand
+
+# Chat settings
+chat:
+  # Enable interactive chat with CodeRabbit
+  enabled: true
+
+# Early access features
+early_access: false
+
+# Review configuration
+path_instructions:
+  - path: "**/*.js"
+    instructions: |
+      Review JavaScript files for:
+      - Security vulnerabilities
+      - Proper error handling
+      - No hardcoded secrets or API keys
+      - Console.log statements that might leak data
+      - Chrome extension API best practices
+      
+  - path: "manifest.json"
+    instructions: |
+      Verify:
+      - Permissions are minimal and justified
+      - No unnecessary permissions added
+      - Version number follows semver
+      - No sensitive data in configuration
+      
+  - path: "background.js"
+    instructions: |
+      Service worker security:
+      - No eval() or unsafe code
+      - Proper message handling
+      - API key handling is secure
+      - Error boundaries present
+      
+  - path: "content.js"
+    instructions: |
+      Content script safety:
+      - No XSS vulnerabilities
+      - Proper DOM manipulation
+      - No memory leaks
+      - Child-safe interactions
+      
+  - path: "popup.{html,js}"
+    instructions: |
+      UI and settings:
+      - Password fields for sensitive data
+      - Input validation present
+      - No inline JavaScript
+      - Accessible for all users
+
+# Ignore patterns
+ignore_patterns:
+  - "CODERABBIT_SETUP.md"
+  - "SECURITY_CHECKLIST.txt"
+  - "*.zip"
+
