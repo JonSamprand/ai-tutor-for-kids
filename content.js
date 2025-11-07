@@ -335,12 +335,14 @@ async function scrapePageContent() {
   // Capture quick screenshot (we'll capture fresh ones for each response anyway)
   let screenshotData = null;
   
-  try {
-    updateTutorStatus('📸 Looking at your screen...');
-    screenshotData = await chrome.runtime.sendMessage({ action: 'captureScreenshot' });
-    console.log('📸 Initial screenshot captured');
-  } catch (e) {
-    console.warn('⚠️ Could not capture screenshot:', e);
+  if (FEATURES.VISION_SUPPORT) {
+    try {
+      updateTutorStatus('📸 Looking at your screen...');
+      screenshotData = await chrome.runtime.sendMessage({ action: 'captureScreenshot' });
+      console.log('📸 Initial screenshot captured');
+    } catch (e) {
+      console.warn('⚠️ Could not capture screenshot:', e);
+    }
   }
 
   // Store page content (fresh screenshots will be captured for each response)
@@ -419,7 +421,7 @@ async function startTurnBasedSession(settings) {
     
     let greeting = '';
     
-    if (pageContent.hasScreenshot && pageContent.screenshot) {
+    if (FEATURES.PROACTIVE_GREETING && pageContent.hasScreenshot && pageContent.screenshot) {
       try {
         // Ask AI to generate a friendly greeting based on what it sees
         const greetingPrompt = buildSystemPrompt(settings.systemPrompt) + 
@@ -472,12 +474,14 @@ async function handleUserSpeech(transcript, settings) {
     // This ensures AI sees exactly what the child is looking at NOW
     // (especially important for FLVS iframes that change content)
     let freshScreenshot = null;
-    try {
-      freshScreenshot = await chrome.runtime.sendMessage({ action: 'captureScreenshot' });
-      console.log('📸 Fresh screenshot captured for this response');
-    } catch (e) {
-      console.warn('⚠️ Could not capture fresh screenshot, using cached');
-      freshScreenshot = pageContent.screenshot;
+    if (FEATURES.VISION_SUPPORT) {
+      try {
+        freshScreenshot = await chrome.runtime.sendMessage({ action: 'captureScreenshot' });
+        console.log('📸 Fresh screenshot captured for this response');
+      } catch (e) {
+        console.warn('⚠️ Could not capture fresh screenshot, using cached');
+        freshScreenshot = pageContent.screenshot;
+      }
     }
     
     updateTutorStatus('🤔 Thinking about your question...');
@@ -645,6 +649,8 @@ async function playMP3Audio(base64Audio) {
 
 // Stop all audio playback
 function stopAllAudio() {
+  if (!FEATURES.AUDIO_CLEANUP) return;
+  
   console.log('🛑 Stopping all audio...');
   
   // Stop MP3 audio
